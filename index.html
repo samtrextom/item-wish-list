@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Best in Slot: Wish List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- favicon - https://realfavicongenerator.net -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<!--<link rel="manifest" href="images/site.webmanifest">-->
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- fonts / icons / css -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Caveat+Brush|Coming+Soon' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+    <script>var whTooltips = {colorLinks: true, iconizeLinks: true, renameLinks: true};</script>
+    <script src="https://wow.zamimg.com/widgets/power.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <v-app>
+        <!-- SLIDE OUT DRAWER / MENU-->
+        
+        
+        
+		<!--  ***** put IT here ***** -->
+
+
+
+        <!-- TOP TOOLBAR -->
+        <v-app-bar class="grey darken-2 white--text" app fixed>
+            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+            <span class="site-title">Best in Slot: Wish List</span>
+
+            <v-spacer></v-spacer>
+
+            <!-- SEARCH BUTTON AND FIELD -->
+            <v-layout justify-end>
+                <v-flex shrink>
+                    <v-expand-x-transition>
+                        <div>
+                            <v-text-field name="search" label="Search" id="searchbar"
+                                          text ></v-text-field>
+                        </div>
+                    </v-expand-x-transition>
+                </v-flex>
+                <v-btn text icon><v-icon>search</v-icon></v-btn>
+            </v-layout>
+        </v-app-bar>
+
+        <!-- MAIN CONTENT AREA -->
+        <v-content class="grey darken-3" fluid grid-list-md text-xs-center>
+            <v-layout justify-center>
+                <v-flex>
+                    <v-container grid-list-lg fluid justify-space-around align-center >
+                        <v-layout class="list">
+                            <list name1="Equip Items"
+                                  name2="Wanted Items"
+                                  :items="items"
+                                  :item_slots="item_slots"
+                                  @finally-remove-item="removeIt"
+                                  @finally-equip-item="equipIt"
+                                  @finally-fav-item="favIt">
+                            </list>
+                        </v-layout>
+                        <!-- FAB (Floating Action Button)-->
+                        <v-row justify="center">
+                            <v-dialog v-model="dialog" persistent max-width="600px">
+                                <template v-slot:activator="{ on }">
+                                    <v-btn color="grey" dark fab fixed bottom right  v-on="on">
+                                        <v-icon>add</v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">User Profile</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-text-field v-model="newItem.name" label="Item Name*" required></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-text-field v-model="newItem.source" label="Item Source*" hint="Where does this item come from?"></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12" sm="6" md="4">
+                                                    <v-select
+                                                            :items="['Uncommon','Rare','Epic','Legendary']"
+                                                            label="Rarity*"
+                                                            v-model="newItem.rarity"
+                                                            required
+                                                    ></v-select>
+                                                </v-col>
+                                                <v-col cols="12" sm="6">
+                                                    <v-select
+                                                            :items="item_slots"
+                                                            label="Item Slot*"
+                                                            v-model="newItem.slot"
+                                                            required
+                                                    ></v-select>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                        <small>*indicates required field</small>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <div class="flex-grow-1"></div>
+                                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                                        <v-btn color="blue darken-1" text @click="addItem">Save</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-row>
+
+                    </v-container>
+                </v-flex>
+            </v-layout>
+        </v-content>
+
+        <!-- FOOTER -->
+
+        <div class="footer-style">
+            <v-footer color="grey darken-2 white--text">
+                <v-spacer></v-spacer>
+                    <div>&copy; {{ new Date().getFullYear() }} — <strong>Best in Slot: Wish List</strong></div>
+                <v-spacer></v-spacer>
+            </v-footer>
+        </div>
+
+    </v-app>
+</div>
+
+<!-- Vue Application -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script src="js/items.js"></script>
+<script src="js/ListItem.js"></script>
+<script src="js/list.js" type="module"></script>
+<script src="js/app.js" type="module"></script>
+<script src="https://kit.fontawesome.com/d0ae30e557.js" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
