@@ -1,5 +1,5 @@
 .application .note, .application .v-input {
-    font-family: 'Coming Soon', 'Roboto', cursive;
+    font-family: 'Roboto', cursive;
     font-size: 1.1em;
 }
 .v-toolbar .site-title {
@@ -21,7 +21,7 @@
 }
 
 .v-list__tile__title{
-    font-family: 'Coming Soon', cursive;
+    font-family:  cursive;
     font-size: 1.1em;
     font-weight: bold;
 }
@@ -131,7 +131,7 @@
 }
 
 .v-list{
-    width:750px;
+    width:650px;
     margin-left: auto;
     margin-right: auto;
 }

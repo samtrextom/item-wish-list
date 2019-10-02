@@ -137,7 +137,7 @@ const items=[
     },
     {
         name:"Thunderfury, Blessed Blade of the Windseeker",
-        slot:"Weapon-Main-Head",
+        slot:"Weapon-Main-Hand",
         rarity:"Legendary",
         source:"Quest",
         equipped:false,
@@ -153,7 +153,7 @@ const items=[
     },
     {
         name:"Hand of Justice",
-        slot:"Trinket",
+        slot:"Trinket-1",
         rarity:"Rare",
         source:"Blackrock Depths",
         equipped:false,
